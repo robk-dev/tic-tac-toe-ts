@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { Board, Winner } from './Board';
 import { StartScreen } from './StartScreen';
+import { ResetScreen } from './ResetScreen';
 
 const BoardContainer = styled.div`
 background: #ffffff;
@@ -31,12 +32,16 @@ export default function App() {
         setGameState("reset");
     };
 
+    const onReset = () => {
+        setWinner(undefined);
+        setGameState("game");
+    };
 
     return <BoardContainer>
         {{
             start: <StartScreen onStart={onStart} />, //<button onClick={() => setGameState("game")} > Start</button>,
             game: <Board onGameEnd={(onGameEnd)}>Start</Board >,
-            reset: <>Start</>
+            reset: <ResetScreen winner={winner} onReset={onReset}></ResetScreen>
         }[gameState]}
     </BoardContainer>
 }
